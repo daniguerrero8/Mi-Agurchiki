@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Agurchiki 💕</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 50%, #ff66b3 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+            color: #fff;
+            visibility: hidden; /* Oculto hasta validar contraseña */
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255,255,255,0.8);
+            animation: float 6s infinite linear;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        .screen {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            transition: opacity 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .hidden { display: none; opacity: 0; }
+        
+        h1 {
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .photo-frame {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: rotate(var(--r));
+        }
+
+        .photo-frame img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        button, .fallback-link {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            font-family: 'Nunito', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-yes, .btn-next { background: #ff6b9d; color: white; }
+        .btn-no { background: #ff4757; color: white; transition: 0.4s; }
+        .btn-back { background: rgba(255, 255, 255, 0.2); color: white; border: 2px solid white; font-size: 0.9rem; }
+
+        .video-container {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 16/9;
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            background: #000;
+        }
+
+        .fallback-link { background: #a55eea; color: white; font-size: 0.9rem; }
+
+        @media (max-width: 450px) {
+            .photo-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // SEGURIDAD: CONTRASEÑA
+        const PASS = 'ALADUSKI'; 
+        let acceso = prompt("Introduce la palabra secreta, mi Almuska:");
+        
+        if (acceso && acceso.toUpperCase() === PASS) {
+            document.body.style.visibility = 'visible';
+        } else {
+            alert("¡Esa no es la palabra! Inténtalo de nuevo ❤️");
+            window.location.reload();
+        }
+    </script>
+
+    <div id="hearts"></div>
+    
+    <div id="mainScreen" class="screen">
+        <h1>¿Quieres ser mi San Valentín, Añchik? 💕</h1>
+        <div class="nav-buttons">
+            <button class="btn-yes" onclick="showMemories()">Sí 💘</button>
+            <button class="btn-no" id="noBtn">No 💔</button>
+        </div>
+    </div>
+
+    <div id="memoryScreen" class="screen hidden">
+        <h1>Recuerdos de este año ✨</h1>
+        <div class="photo-grid">
+            <div class="photo-frame" style="--r: -2deg;"><img src="foto1.jpg" alt="1"></div>
+            <div class="photo-frame" style="--r: 2deg;"><img src="foto2.jpg" alt="2"></div>
+            <div class="photo-frame" style="--r: -3deg;"><img src="foto3.jpg" alt="3"></div>
+            <div class="photo-frame" style="--r: 3deg;"><img src="foto4.jpg" alt="4"></div>
+            <div class="photo-frame" style="--r: -1deg;"><img src="foto5.jpg" alt="5"></div>
+            <div class="photo-frame" style="--r: 2deg;"><img src="foto6.jpg" alt="6"></div>
+        </div>
+        <div class="nav-buttons">
+            <button class="btn-back" onclick="goBackToMain()">↩️ Atrás</button>
+            <button class="btn-next" onclick="showFinal()">Siguiente ✨</button>
+        </div>
+    </div>
+    
+    <div id="finalScreen" class="screen hidden">
+        <h1>Te amo con toda mi ALMUSKA 🥹❤️</h1>
+        <div class="video-container">
+            <iframe id="ytPlayer" width="100%" height="100%" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="nav-buttons">
+            <button class="btn-back" onclick="goBackToMemories()">↩️ Volver a las fotos</button>
+            <a href="https://www.youtube.com/watch?v=jSPpbOGnFgk" target="_blank" class="fallback-link">🎵 Abrir en YouTube</a>
+        </div>
+    </div>
+    
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 400);
+
+        const noBtn = document.getElementById('noBtn');
+        noBtn.addEventListener('mouseenter', () => noBtn.style.transform = 'translateX(-100px)');
+        noBtn.addEventListener('mouseleave', () => noBtn.style.transform = 'translateX(0)');
+
+        function showMemories() {
+            document.getElementById('mainScreen').classList.add('hidden');
+            document.getElementById('memoryScreen').classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function showFinal() {
+            document.getElementById('memoryScreen').classList.add('hidden');
+            document.getElementById('finalScreen').classList.remove('hidden');
+            document.getElementById('ytPlayer').src = "https://www.youtube-nocookie.com/embed/jSPpbOGnFgk?autoplay=1";
+            window.scrollTo(0,0);
+        }
+
+        function goBackToMain() {
+            document.getElementById('memoryScreen').classList.add('hidden');
+            document.getElementById('mainScreen').classList.remove('hidden');
+        }
+
+        function goBackToMemories() {
+            document.getElementById('ytPlayer').src = ""; 
+            document.getElementById('finalScreen').classList.add('hidden');
+            document.getElementById('memoryScreen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
